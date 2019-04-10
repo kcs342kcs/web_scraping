@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Homework</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1><strong>MISSION TO MARS</strong></h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape new data</a></p>
+    </div>
+    <div class='row'>
+       <div class='col-lg-12'>
+         <h3><strong>Latest Mars News</strong></h3>
+         <h4>{{ mars_data['news_title'] }}</h2>
+         <h5>{{ mars_data['news_info'] }}</h5>
+       </div>
+    </div><!--close row-->
+    <div class='row'>
+       <div class='col-lg-8 bigbox'>
+         <h3 style='padding:15px'>Featured Mars Image</h3>
+         <img src={{ mars_data['featured_image'] }} height='500px' width ='800px'/>
+       </div>
+       <div class='col-lg-4' style='padding:50px' >
+        <div class='card' style='width: 30rem;border=1'>
+         <div class='card-body'>
+           <h4 class='card-title'>Current Weather on Mars</h4>
+           <p class='card-text'>{{ mars_data['mars_weather'] }}</p>
+          </div>
+        </div>
+        <div>
+              <h4>Mars Facts</h4>
+              {{ mars_data['mars_table'] | safe }}
+        </div>
+        </div><!--close row-->
+        <div class='row'>
+          <div class='col-lg-12' style='padding:20px'>
+           <h3 style='text-align:center'><strong>Mars Hemispheres</strong></h3>
+          </div>
+           {% for i in mars_data['hemispheres'] %}
+           <div class='col-lg-6 imBox'>
+            <figure>
+              <img src={{ i['link'] }} height='300px' width='300px' />
+              <figcaption><strong>{{ i['title'] }}</strong></figcaption>
+            </figure>
+            </div>
+           {% endfor %}
+        </div> <!--end row-->
+        <div class='row'>
+          <div class='col-lg-12' style='padding:20px'>
+            <h3 style='text-align:center'><strong>Mars Trivia</strong></h3>
+            <ul>
+               {% for i in mars_data['mars_trivia'] %}
+               <li><p>{{ i }}</p></li>
+               {% endfor %}
+            </ul>
+          </div>
+        </div><!--end row-->  
+    </div>
+</div>
+  </div>
+  </div>
+</body>
+
+</html>
